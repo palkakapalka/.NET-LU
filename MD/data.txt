@@ -1,0 +1,10 @@
+People:
+Name: John, Surname: Doe, FullName: John Doe, Gender: Man, ContractDate: 07.10.2024 4:46:57
+Name: Jane, Surname: Doe, FullName: Jane Doe, Gender: Woman, StudentIdNumber: S1234
+Courses:
+Course Name: Mathematics, Teacher: John Doe
+Assignments:
+Deadline: 14.10.2024 4:46:57, Course: Mathematics, Description: Algebra Homework
+Submissions:
+Algebra Homework, Score: 95
+
