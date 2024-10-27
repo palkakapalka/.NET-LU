@@ -1,10 +1,10 @@
 People:
-Name: John, Surname: Doe, FullName: John Doe, Gender: Man, ContractDate: 07.10.2024 4:46:57
-Name: Jane, Surname: Doe, FullName: Jane Doe, Gender: Woman, StudentIdNumber: S1234
+Name: Janis, Surname: Berziņš, FullName: Janis Berziņš, Gender: Man, ContractDate: 28.10.2024 1:33:52
+Name: Anna, Surname: Priede, FullName: Anna Priede, Gender: Woman, StudentIdNumber: AP1234
 Courses:
-Course Name: Mathematics, Teacher: John Doe
+Course Name: Mathematics, Teacher: Janis Berziņš
 Assignments:
-Deadline: 14.10.2024 4:46:57, Course: Mathematics, Description: Algebra Homework
+Deadline: 04.11.2024 1:33:52, Course: Mathematics, Description: Algebra Homework
 Submissions:
 Algebra Homework, Score: 95
 

@@ -1,84 +1,135 @@
-﻿using System; // Импортируем пространство имен для работы с DateTime
-using System.Collections.Generic; // Импортируем пространство имен для работы с коллекциями
-using System.IO; // Импортируем пространство имен для работы с файлами
-
-namespace project // Пространство имен
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+// 9.punkts
+namespace project
 {
-    public class DataManager : IDataManager // Класс DataManager, реализующий IDataManager
+    public class DataManager : IDataManager
     {
-        private DataCollections _dataCollections = new DataCollections(); // Коллекция данных (Data collection)
+        private DataCollections _dataCollections = new DataCollections();
 
-        public string Print() // Реализация метода Print (Implementation of Print method)
+        public string Print()
         {
-            // Строка для хранения вывода (String to store output)
             string output = "People:\n";
-            foreach (var person in _dataCollections.People) // Перебираем людей (Iterate through people)
+            foreach (var person in _dataCollections.People)
             {
-                output += person.ToString() + "\n"; // Добавляем информацию о человеке (Add person info)
+                output += person.ToString() + "\n"; // pivienojam informaciju par cilveku
             }
 
-            output += "Courses:\n"; // Добавляем курсы (Add courses)
-            foreach (var course in _dataCollections.Courses) // Перебираем курсы (Iterate through courses)
+            output += "Courses:\n"; // pivienojam kursus
+            foreach (var course in _dataCollections.Courses)
             {
-                output += course.ToString() + "\n"; // Добавляем информацию о курсе (Add course info)
+                output += course.ToString() + "\n"; // pivienojam informaciju par kursus
             }
 
-            output += "Assignments:\n"; // Добавляем задания (Add assignments)
-            foreach (var assignment in _dataCollections.Assignments) // Перебираем задания (Iterate through assignments)
+            output += "Assignments:\n";
+            foreach (var assignment in _dataCollections.Assignments)
             {
-                output += assignment.ToString() + "\n"; // Добавляем информацию о задании (Add assignment info)
+                output += assignment.ToString() + "\n"; // pivienojam uzdevumus
             }
 
-            output += "Submissions:\n"; // Добавляем сдачи (Add submissions)
-            foreach (var submission in _dataCollections.Submissions) // Перебираем сдачи (Iterate through submissions)
+            output += "Submissions:\n";
+            foreach (var submission in _dataCollections.Submissions)
             {
-                output += $"{submission.Assignment?.Description}, Score: {submission.Score}\n"; // Добавляем информацию о сдаче (Add submission info)
+                output += $"{submission.Assignment?.Description}, Score: {submission.Score}\n"; // pievienojam nodevumus
             }
 
-            return output; // Возвращаем вывод (Return output)
+            return output;
         }
 
-        public void Save(string path) // Реализация метода Save (Implementation of Save method)
+        public void Save(string path)
         {
-            using (var writer = new StreamWriter(path)) // Создаем объект StreamWriter (Create StreamWriter object)
+            using (var writer = new StreamWriter(path))
             {
-                writer.WriteLine(Print()); // Записываем данные в файл (Write data to file)
-            }
-        }
-
-        public void Load(string path) // Реализация метода Load (Implementation of Load method)
-        {
-            // Загрузка данных из файла (Loading data from file)
-            if (File.Exists(path)) // Проверяем, существует ли файл (Check if the file exists)
-            {
-                string[] lines = File.ReadAllLines(path); // Читаем все строки из файла (Read all lines from the file)
-                // Логика для восстановления коллекции из строк (Logic to restore collection from lines)
-                // Это нужно реализовать в зависимости от формата сохранения (This needs to be implemented based on the save format)
+                writer.WriteLine(Print());
             }
         }
 
-        public void CreateTestData() // Реализация метода CreateTestData (Implementation of CreateTestData method)
+        public void Load(string path)
         {
-            // Создаем тестовые данные (Create test data)
-            var teacher = new Teacher { Name = "John", Surname = "Doe", Gender = Gender.Man, ContractDate = DateTime.Now }; // Создаем учителя (Create a teacher)
-            _dataCollections.People.Add(teacher); // Добавляем учителя в коллекцию (Add teacher to collection)
-
-            var student = new Student("Jane", "Doe", Gender.Woman, "S1234"); // Создаем студента (Create a student)
-            _dataCollections.People.Add(student); // Добавляем студента в коллекцию (Add student to collection)
-
-            var course = new Course { Name = "Mathematics", Teacher = teacher }; // Создаем курс (Create a course)
-            _dataCollections.Courses.Add(course); // Добавляем курс в коллекцию (Add course to collection)
-
-            var assignment = new Assignment { Deadline = DateTime.Now.AddDays(7), Course = course, Description = "Algebra Homework" }; // Создаем задание (Create an assignment)
-            _dataCollections.Assignments.Add(assignment); // Добавляем задание в коллекцию (Add assignment to collection)
-
-            var submission = new Submission { Assignment = assignment, Student = student, SubmissionTime = DateTime.Now, Score = 95 }; // Создаем сдачу (Create a submission)
-            _dataCollections.Submissions.Add(submission); // Добавляем сдачу в коллекцию (Add submission to collection)
+            // ieladejam datus no fails
+            if (File.Exists(path)) // parbaudam vai fails eksiste
+            {
+                string[] lines = File.ReadAllLines(path);
+                _dataCollections = new DataCollections(); // Reset data collections before loading
+                foreach (var line in lines)
+                {
+                    if (line.StartsWith("Name:")) // checking if it's a Person
+                    {
+                        // Parse person details from the line and add to People list
+                        var parts = line.Split(',');
+                        var person = new Student
+                        {
+                            Name = parts[0].Split(':')[1].Trim(),
+                            Surname = parts[1].Split(':')[1].Trim(),
+                            Gender = Enum.Parse<Gender>(parts[3].Split(':')[1].Trim())
+                        };
+                        _dataCollections.People.Add(person);
+                    }
+                    else if (line.StartsWith("Course Name:")) // checking if it's a Course
+                    {
+                        // Parse course details from the line and add to Courses list
+                        var parts = line.Split(',');
+                        var course = new Course
+                        {
+                            Name = parts[0].Split(':')[1].Trim()
+                        };
+                        _dataCollections.Courses.Add(course);
+                    }
+                    else if (line.StartsWith("Deadline:")) // checking if it's an Assignment
+                    {
+                        // Parse assignment details from the line and add to Assignments list
+                        var parts = line.Split(',');
+                        if (DateTime.TryParseExact(parts[0].Split(':')[1].Trim(), "dd.MM.yyyy H", null, System.Globalization.DateTimeStyles.None, out DateTime deadline)) // Изменяем формат даты
+                        {
+                            var assignment = new Assignment
+                            {
+                                Deadline = deadline,
+                                Description = parts[2].Split(':')[1].Trim()
+                            };
+                            _dataCollections.Assignments.Add(assignment);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Unable to parse date: {parts[0].Split(':')[1].Trim()}");
+                        }
+                    }
+                    else if (line.Contains("Score:")) // checking if it's a Submission
+                    {
+                        // Parse submission details from the line and add to Submissions list
+                        var parts = line.Split(',');
+                        var submission = new Submission
+                        {
+                            Score = int.Parse(parts[1].Split(':')[1].Trim())
+                        };
+                        _dataCollections.Submissions.Add(submission);
+                    }
+                }
+            }
         }
 
-        public void Reset() // Реализация метода Reset (Implementation of Reset method)
+        public void CreateTestData()
         {
-            _dataCollections = new DataCollections(); // Сбрасываем коллекцию данных (Reset data collection)
+            // testa dati
+            var teacher = new Teacher { Name = "Janis", Surname = "Berziņš", Gender = Gender.Man, ContractDate = DateTime.Now }; // veidojam pasniedzeju
+            _dataCollections.People.Add(teacher);
+
+            var student = new Student("Anna", "Priede", Gender.Woman, "AP1234"); // veidojam studentu
+            _dataCollections.People.Add(student);
+
+            var course = new Course { Name = "Mathematics", Teacher = teacher }; // viedojam kursu
+            _dataCollections.Courses.Add(course);
+
+            var assignment = new Assignment { Deadline = DateTime.Now.AddDays(7), Course = course, Description = "Algebra Homework" }; // veidojam uzdevumu
+            _dataCollections.Assignments.Add(assignment);
+
+            var submission = new Submission { Assignment = assignment, Student = student, SubmissionTime = DateTime.Now, Score = 95 }; // veidojam nodevumu
+            _dataCollections.Submissions.Add(submission);
+        }
+
+        public void Reset()
+        {
+            _dataCollections = new DataCollections(); // Reset data collection
         }
     }
 }

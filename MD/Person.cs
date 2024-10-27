@@ -1,83 +1,79 @@
-﻿using System; // Импортируем пространство имен для работы с DateTime
-
-namespace project // Пространство имен
+﻿using System; 
+// 1.punkts
+namespace project 
 {
-    public enum Gender // Перечисление для пола
+    public enum Gender // Pārskaitam genderus
     {
-        Man, // Мужчина
-        Woman // Женщина
+        Man, 
+        Woman 
     }
 
-    public abstract class Person // Абстрактный класс Person
-    {
-        private string _name; // Приватное поле для имени (Private field for name)
-        private string _surname; // Приватное поле для фамилии (Private field for surname)
+    public abstract class Person {
 
-        public string Name // Свойство для имени (Property for name)
+        private string _name; 
+        private string _surname; 
+
+        public string Name 
         {
-            get { return _name; } // Возвращаем имя (Return name)
+            get { return _name; } 
             set
             {
-                if (!string.IsNullOrEmpty(value)) // Проверяем, что значение не пустое (Check if the value is not empty)
-                    _name = value; // Устанавливаем имя (Set name)
+                if (!string.IsNullOrEmpty(value)) // parbaudam vai ir tukš
+                    _name = value; 
             }
         }
 
-        public string Surname // Свойство для фамилии (Property for surname)
+        public string Surname // uzvarda ipašiba
         {
-            get { return _surname; } // Возвращаем фамилию (Return surname)
+            get { return _surname; }
             set
             {
-                if (!string.IsNullOrEmpty(value)) // Проверяем, что значение не пустое (Check if the value is not empty)
-                    _surname = value; // Устанавливаем фамилию (Set surname)
+                if (!string.IsNullOrEmpty(value)) // parbaudam vai nav tukš
+                    _surname = value;
             }
         }
 
-        public string FullName => $"{Name} {Surname}"; // Свойство для полного имени (Property for full name)
+        public string FullName => $"{Name} {Surname}"; // pilna varda ipašiba
 
-        public Gender Gender { get; set; } // Свойство для пола (Property for gender)
+        public Gender Gender { get; set; } // gendera ipašiba
 
-        public override string ToString() // Переопределяем метод ToString() (Override ToString method)
+        public override string ToString() 
         {
-            return $"Name: {Name}, Surname: {Surname}, FullName: {FullName}, Gender: {Gender}"; // Возвращаем строку с данными (Return a string with data)
+            return $"Name: {Name}, Surname: {Surname}, FullName: {FullName}, Gender: {Gender}"; 
         }
     }
 
-    /// <summary>
-    /// ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// </summary>
+    //2.punkts
 
-    public class Teacher : Person // Класс Teacher, наследующий от Person
+    public class Teacher : Person 
     {
-        public DateTime ContractDate { get; set; } // Свойство для даты контракта (Property for contract date)
+        public DateTime ContractDate { get; set; } // kontrakta datums
 
-        public override string ToString() // Переопределяем метод ToString() (Override ToString method)
+        public override string ToString() 
         {
-            return base.ToString() + $", ContractDate: {ContractDate}"; // Возвращаем строку с данными (Return a string with data)
+            return base.ToString() + $", ContractDate: {ContractDate}"; 
         }
     }
 
-    /// <summary>
-    /// ///////////////////////////////////////////////////////////////////////
-    /// </summary>
+    //3.punkts
 
-    public class Student : Person // Класс Student, наследующий от Person
+    public class Student : Person 
     {
-        public string StudentIdNumber { get; set; } // Свойство для номера студента (Property for student ID number)
+        public string StudentIdNumber { get; set; } // ipašiba studenta apliecibas numuram
 
-        public Student(string name, string surname, Gender gender, string studentIdNumber) // Конструктор с параметрами (Constructor with parameters)
+        public Student(string name, string surname, Gender gender, string studentIdNumber) 
         {
-            Name = name; // Устанавливаем имя (Set name)
-            Surname = surname; // Устанавливаем фамилию (Set surname)
-            Gender = gender; // Устанавливаем пол (Set gender)
-            StudentIdNumber = studentIdNumber; // Устанавливаем номер студента (Set student ID number)
+            Name = name; 
+            Surname = surname; 
+            Gender = gender; 
+            StudentIdNumber = studentIdNumber; 
         }
 
-        public Student() { } // Пустой конструктор (Empty constructor)
+        public Student() { } // tukš konstruktors
 
-        public override string ToString() // Переопределяем метод ToString() (Override ToString method)
+        public override string ToString()
         {
-            return base.ToString() + $", StudentIdNumber: {StudentIdNumber}"; // Возвращаем строку с данными (Return a string with data)
+            return base.ToString() + $", StudentIdNumber: {StudentIdNumber}";
         }
     }
 }

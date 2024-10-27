@@ -1,21 +1,24 @@
-﻿using System; // Импортируем пространство имен для работы с DateTime
-
-namespace project // Пространство имен
+﻿using System;
+// 10.punkts izmanroju W#school un ChatGPT
+namespace project 
 {
-    class Program // Класс Program
+    class Program 
     {
-        static void Main(string[] args) // Основной метод (Main method)
+        static void Main(string[] args) 
         {
-            string path = "data.txt"; // Путь к файлу (Path to file) - относительный путь
-            var dm = new DataManager(); // Создаем экземпляр DataManager (Create DataManager instance)
-            dm.CreateTestData(); // Создаем тестовые данные (Create test data)
-            Console.WriteLine(dm.Print()); // Печатаем данные (Print data)
-            dm.Save(path); // Сохраняем данные в файл (Save data to file)
-            dm.Reset(); // Сбрасываем данные (Reset data)
-            Console.WriteLine(dm.Print()); // Печатаем данные (Print data)
-            dm.Load(path); // Загружаем данные из файла (Load data from file)
-            Console.WriteLine(dm.Print()); // Печатаем данные (Print data)
-            Console.ReadLine(); // Ожидаем ввода пользователя (Wait for user input)
+            string path = "data.txt"; // path to file
+            var dm = new DataManager(); // veidojam DataManager 
+            dm.CreateTestData(); // veidojam testa datus
+            Console.WriteLine(dm.Print()); // izvadam datus konsole
+            
+             dm.Save(path); // galbjam datus faila
+            dm.Reset(); // Reset data
+            Console.WriteLine(dm.Print());// izvadam datus konsole 
+            dm.Load(path); // ladejam datus no faila
+            Console.WriteLine(dm.Print()); // izvadam datus konsole 
+            Console.ReadLine(); 
+             
+            
         }
     }
 }

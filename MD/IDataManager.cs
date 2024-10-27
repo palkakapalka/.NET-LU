@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic; // Импортируем пространство имен для работы с коллекциями
+﻿using System.Collections.Generic; 
 
-namespace project // Пространство имен
+namespace project 
 {
-    public interface IDataManager // Интерфейс IDataManager
+    public interface IDataManager 
     {
-        string Print(); // Метод для вывода информации (Method to print information)
-        void Save(string path); // Метод для сохранения данных (Method to save data)
-        void Load(string path); // Метод для загрузки данных (Method to load data)
-        void CreateTestData(); // Метод для создания тестовых данных (Method to create test data)
-        void Reset(); // Метод для сброса данных (Method to reset data)
+        string Print(); 
+        void Save(string path); 
+        void Load(string path);
+        void CreateTestData();
+        void Reset(); 
     }
 }
