@@ -51,10 +51,10 @@ namespace project
             if (File.Exists(path)) // parbaudam vai fails eksiste
             {
                 string[] lines = File.ReadAllLines(path);
-                _dataCollections = new DataCollections(); // Reset data collections before loading
+                _dataCollections = new DataCollections(); // Resetojam datu kolekcijas pirms tos ieladet
                 foreach (var line in lines)
                 {
-                    if (line.StartsWith("Name:")) // checking if it's a Person
+                    if (line.StartsWith("Name:")) 
                     {
                         // Parse person details from the line and add to People list
                         var parts = line.Split(',');
@@ -66,7 +66,7 @@ namespace project
                         };
                         _dataCollections.People.Add(person);
                     }
-                    else if (line.StartsWith("Course Name:")) // checking if it's a Course
+                    else if (line.StartsWith("Course Name:")) 
                     {
                         // Parse course details from the line and add to Courses list
                         var parts = line.Split(',');
@@ -76,7 +76,7 @@ namespace project
                         };
                         _dataCollections.Courses.Add(course);
                     }
-                    else if (line.StartsWith("Deadline:")) // checking if it's an Assignment
+                    else if (line.StartsWith("Deadline:")) 
                     {
                         // Parse assignment details from the line and add to Assignments list
                         var parts = line.Split(',');
@@ -94,7 +94,7 @@ namespace project
                             Console.WriteLine($"Unable to parse date: {parts[0].Split(':')[1].Trim()}");
                         }
                     }
-                    else if (line.Contains("Score:")) // checking if it's a Submission
+                    else if (line.Contains("Score:")) //
                     {
                         // Parse submission details from the line and add to Submissions list
                         var parts = line.Split(',');
