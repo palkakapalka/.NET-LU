@@ -54,7 +54,7 @@ namespace project
                 _dataCollections = new DataCollections(); // Resetojam datu kolekcijas pirms tos ieladet
                 foreach (var line in lines)
                 {
-                    if (line.StartsWith("Name:")) 
+                    if (line.StartsWith("Name:"))
                     {
                         // Parse person details from the line and add to People list
                         var parts = line.Split(',');
@@ -66,7 +66,7 @@ namespace project
                         };
                         _dataCollections.People.Add(person);
                     }
-                    else if (line.StartsWith("Course Name:")) 
+                    else if (line.StartsWith("Course Name:"))
                     {
                         // Parse course details from the line and add to Courses list
                         var parts = line.Split(',');
@@ -76,7 +76,7 @@ namespace project
                         };
                         _dataCollections.Courses.Add(course);
                     }
-                    else if (line.StartsWith("Deadline:")) 
+                    else if (line.StartsWith("Deadline:"))
                     {
                         // Parse assignment details from the line and add to Assignments list
                         var parts = line.Split(',');
@@ -94,7 +94,7 @@ namespace project
                             Console.WriteLine($"Unable to parse date: {parts[0].Split(':')[1].Trim()}");
                         }
                     }
-                    else if (line.Contains("Score:")) //
+                    else if (line.Contains("Score:"))
                     {
                         // Parse submission details from the line and add to Submissions list
                         var parts = line.Split(',');
@@ -107,6 +107,7 @@ namespace project
                 }
             }
         }
+
 
         public void CreateTestData()
         {
@@ -130,6 +131,54 @@ namespace project
         public void Reset()
         {
             _dataCollections = new DataCollections(); // Reset data collection
+        }
+
+        /////////////////////////////////////////////////////////  MD2 /////////////////////////////////////////////////////////
+
+        public List<Student> Students { get; set; } = new List<Student>();
+        public List<Course> Courses { get; set; } = new List<Course>();
+        public List<Assignment> Assignments { get; set; } = new List<Assignment>();
+        public List<Submission> Submissions { get; set; } = new List<Submission>();
+
+        // jauna studenta pievienošanas metode
+        public void AddStudent(string name, string surname, Gender gender)
+        {
+            var student = new Student
+            {
+                Name = name,
+                Surname = surname,
+                Gender = gender
+            };
+        
+            _dataCollections.People.Add(student);
+        }
+
+        // jauna uzdevuma pievienošanas metode
+        public void AddAssignment(string description, DateTime deadline, string courseName)
+        {
+            var assignment = new Assignment
+            {
+                Description = description,
+                Deadline = deadline,
+                Course = new Course { Name = courseName }
+            };
+            _dataCollections.Assignments.Add(assignment);
+
+        }
+
+        // jauna nodevuma pievienošanas metode
+        public void AddSubmission(string studentName, string assignmentDescription, int score)
+        {
+
+            var submission = new Submission 
+            {
+                Score = score,
+                Student = new Student { Name = studentName },
+                Assignment = new Assignment { Description = assignmentDescription }
+
+            };
+            _dataCollections.Submissions.Add(submission);
+
         }
     }
 }
