@@ -40,6 +40,14 @@
                         FontSize="18"
                         Padding="10,5" />
 
+                <Button Text="Saglabar datus failā" 
+                        Clicked="SaveDataInFile"
+                        BackgroundColor="#e67e52"
+                        TextColor="White"
+                        CornerRadius="8"
+                        FontSize="18"
+                        Padding="10,5" />
+
                 <!-- Button to toggle the Student Creation form -->
                 <Button Text="Izveidot Studentu" 
                         Clicked="OnToggleStudentCreationClicked"
@@ -53,11 +61,12 @@
                 <StackLayout x:Name="StudentCreationForm" IsVisible="False" Padding="10">
                     <Entry x:Name="StudentNameEntry" Placeholder="Student Name" />
                     <Entry x:Name="StudentSurnameEntry" Placeholder="Student Surname" />
+                    <Entry x:Name="StudentIdNumberEntry" Placeholder="Student ID" />
                     <Picker x:Name="GenderPicker">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
-                                <x:String>Male</x:String>
-                                <x:String>Female</x:String>
+                                <x:String>Man</x:String>
+                                <x:String>Woman</x:String>
                             </x:Array>
                         </Picker.ItemsSource>
                     </Picker>
@@ -115,7 +124,80 @@
                             FontSize="18"
                             Padding="10,5" />
                 </StackLayout>
+                <!-- Button to toggle visibility of Assignment form -->
+                <Button Text="Edit Assignment"
+                Clicked="OnToggleAssignmentFormClicked"
+                BackgroundColor="#3498db"
+                TextColor="White"
+                CornerRadius="8"
+                FontSize="18"
+                Padding="10,5" />
 
+                <!-- StackLayout for editing Assignment, initially hidden -->
+                <StackLayout x:Name="AssignmentForm" IsVisible="False" Padding="10">
+                    <Entry x:Name="CurrentAssignmentDescription" Placeholder="Current Assignment Description" />
+                    <Entry x:Name="NewAssignmentDescription" Placeholder="New Assignment Description" />
+                    <Entry x:Name="NewAssignmentDeadline" Placeholder="New Deadline (dd.MM.yyyy H)" />
+                    <Entry x:Name="NewCourseName" Placeholder="New Course Name" />
+                    <Button Text="Update Assignment"
+                    Clicked="OnUpdateAssignmentClicked"
+                    BackgroundColor="#3498db"
+                    TextColor="White"
+                    CornerRadius="8"
+                    FontSize="18"
+                    Padding="10,5" />
+                </StackLayout>
+
+                <!-- Button to toggle visibility of Submission form -->
+                <Button Text="Edit Submission"
+                Clicked="OnToggleSubmissionFormClicked"
+                BackgroundColor="#3498db"
+                TextColor="White"
+                CornerRadius="8"
+                FontSize="18"
+                Padding="10,5" />
+
+                <!-- StackLayout for editing Submission, initially hidden -->
+                <StackLayout x:Name="SubmissionForm" IsVisible="False" Padding="10">
+                    <Entry x:Name="SubmissionStudentName" Placeholder="Student Name" />
+                    <Entry x:Name="SubmissionAssignmentDescription" Placeholder="Assignment Description" />
+                    <Entry x:Name="NewSubmissionScore" Placeholder="New Score" Keyboard="Numeric" />
+                    <Button Text="Update Submission"
+                    Clicked="OnUpdateSubmissionClicked"
+                    BackgroundColor="#3498db"
+                    TextColor="White"
+                    CornerRadius="8"
+                    FontSize="18"
+                    Padding="10,5" />
+                </StackLayout>
+
+                <!-- Assignment Deletion Form -->
+                <StackLayout x:Name="AssignmentDeletionForm" Padding="10">
+                    <Label Text="Delete Assignment" FontAttributes="Bold" FontSize="18" />
+                    <Entry x:Name="AssignmentDescriptionEnter" Placeholder="Assignment Description" />
+                    <Button Text="Delete Assignment"
+                    Clicked="OnDeleteAssignmentClicked"
+                    BackgroundColor="#e74c3c"
+                    TextColor="White"
+                    CornerRadius="8"
+                    FontSize="18"
+                    Padding="10,5" />
+                </StackLayout>
+
+                <!-- Submission Deletion Form -->
+                <StackLayout x:Name="SubmissionDeletionForm" Padding="10">
+                    <Label Text="Delete Submission" FontAttributes="Bold" FontSize="18" />
+                    <Entry x:Name="SubmissionStudentNameEnter" Placeholder="Student Name" />
+                    <Entry x:Name="SubmissionStudentSurnameEnter" Placeholder="Student Surname" />
+                    <Entry x:Name="SubmissionAssignmentDescriptionEnter" Placeholder="Assignment Description" />
+                    <Button Text="Delete Submission"
+                    Clicked="OnDeleteSubmissionClicked"
+                    BackgroundColor="#e74c3c"
+                    TextColor="White"
+                    CornerRadius="8"
+                    FontSize="18"
+                    Padding="10,5" />
+                </StackLayout>
             </StackLayout>
         </ScrollView>
 

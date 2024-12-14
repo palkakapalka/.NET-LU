@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Linq;
 // 9.punkts
 namespace project
 {
@@ -31,7 +32,7 @@ namespace project
             output += "Submissions:\n";
             foreach (var submission in _dataCollections.Submissions)
             {
-                output += $"{submission.Assignment?.Description}, Score: {submission.Score}\n"; // pievienojam nodevumus
+                output += $"Uzdevums: {submission.Assignment?.Description}, Name: {submission.Student?.Name} {submission.Student?.Surname},  Score: {submission.Score}\n"; // pievienojam nodevumus
             }
 
             return output;
@@ -58,13 +59,27 @@ namespace project
                     {
                         // Parse person details from the line and add to People list
                         var parts = line.Split(',');
-                        var person = new Student
+                        if (parts[4].StartsWith(" StudentIdNumber:")) {
+                            var person = new Student {
+                                StudentIdNumber = parts[4].Split(':')[1].Trim(),
+                                Name = parts[0].Split(':')[1].Trim(),
+                                Surname = parts[1].Split(':')[1].Trim(),
+                                Gender = Enum.Parse<Gender>(parts[3].Split(':')[1].Trim())
+                            };
+                            _dataCollections.People.Add(person);
+                        }else if (DateTime.TryParseExact(parts[4].Split(':')[1].Trim(), "dd.MM.yyyy H", null, System.Globalization.DateTimeStyles.None, out DateTime contractdate))
                         {
-                            Name = parts[0].Split(':')[1].Trim(),
-                            Surname = parts[1].Split(':')[1].Trim(),
-                            Gender = Enum.Parse<Gender>(parts[3].Split(':')[1].Trim())
-                        };
-                        _dataCollections.People.Add(person);
+                            var person = new Teacher
+                            {
+                                Name = parts[0].Split(':')[1].Trim(),
+                                Surname = parts[1].Split(':')[1].Trim(),
+                                Gender = Enum.Parse<Gender>(parts[3].Split(':')[1].Trim()),
+                                ContractDate = contractdate
+                            };
+                            _dataCollections.People.Add(person);
+                        }
+                        
+                        
                     }
                     else if (line.StartsWith("Course Name:"))
                     {
@@ -72,7 +87,8 @@ namespace project
                         var parts = line.Split(',');
                         var course = new Course
                         {
-                            Name = parts[0].Split(':')[1].Trim()
+                            Name = parts[0].Split(':')[1].Trim(),
+                            Teacher = new Teacher { Name = parts[1].Split(':')[1].Trim() }
                         };
                         _dataCollections.Courses.Add(course);
                     }
@@ -85,7 +101,8 @@ namespace project
                             var assignment = new Assignment
                             {
                                 Deadline = deadline,
-                                Description = parts[2].Split(':')[1].Trim()
+                                Description = parts[2].Split(':')[1].Trim(),
+                                Course = new Course { Name = parts[1].Split(':')[1].Trim() }
                             };
                             _dataCollections.Assignments.Add(assignment);
                         }
@@ -94,13 +111,15 @@ namespace project
                             Console.WriteLine($"Unable to parse date: {parts[0].Split(':')[1].Trim()}");
                         }
                     }
-                    else if (line.Contains("Score:"))
+                    else if (line.Contains("Uzdevums:"))
                     {
                         // Parse submission details from the line and add to Submissions list
                         var parts = line.Split(',');
                         var submission = new Submission
                         {
-                            Score = int.Parse(parts[1].Split(':')[1].Trim())
+                            Score = int.Parse(parts[2].Split(':')[1].Trim()),
+                            Student = new Student { Name = parts[1].Split(':')[1].Trim() },
+                            Assignment = new Assignment { Description = parts[0].Split(':')[1].Trim() }
                         };
                         _dataCollections.Submissions.Add(submission);
                     }
@@ -141,13 +160,14 @@ namespace project
         public List<Submission> Submissions { get; set; } = new List<Submission>();
 
         // jauna studenta pievienošanas metode
-        public void AddStudent(string name, string surname, Gender gender)
+        public void AddStudent(string name, string surname,string studentIdNumber, Gender gender)
         {
             var student = new Student
             {
                 Name = name,
                 Surname = surname,
-                Gender = gender
+                Gender = gender,
+                StudentIdNumber = studentIdNumber
             };
         
             _dataCollections.People.Add(student);
@@ -180,5 +200,70 @@ namespace project
             _dataCollections.Submissions.Add(submission);
 
         }
+
+        //  Assignment rediģešanas funkcija
+        public void UpdateAssignment(string currentDescription, string newDescription, DateTime newDeadline, string newCourseName)
+        {
+            // meklejam uzdevumu pa aprakstu
+            var assignment = _dataCollections.Assignments.Find(a => a.Description == currentDescription);
+            if (assignment != null)
+            {
+                // atjauno ipašibas
+                assignment.Description = newDescription;
+                assignment.Deadline = newDeadline;
+                assignment.Course = new Course { Name = newCourseName };
+            }
+            else
+            {
+                Console.WriteLine("Assignment не найден.");
+            }
+        }
+
+        // Assignment rediģešanas Submission
+        public void UpdateSubmission(string studentName, string assignmentDescription, int newScore)
+        {
+            // Meklekam nodevumu izmatojot studenta vardu un uzdevuma aprakstu
+            var submission = _dataCollections.Submissions.Find(s => s.Student.Name == studentName && s.Assignment.Description == assignmentDescription);
+
+            if (submission != null)
+            {
+                //atjauno ipašibas
+                submission.Score = newScore;
+            }
+            else
+            {
+                Console.WriteLine("Submission не найден.");
+            }
+        }
+
+        // Assignment dzēšana
+        public void DeleteAssignment(string description)
+        {
+            var assignment = _dataCollections.Assignments.FirstOrDefault(a => a.Description == description);
+            if (assignment != null)
+            {
+                _dataCollections.Assignments.Remove(assignment);
+            }
+            else
+            {
+                Console.WriteLine($"Assignment with description '{description}' not found.");
+            }
+        }
+
+        // Submission dzēšana
+        public void DeleteSubmission(string studentName, string studentSurname, string assignmentDescription)
+        {
+            var submission = _dataCollections.Submissions.FirstOrDefault(s => s.Student.Name == studentName && s.Student.Surname == studentSurname && s.Assignment.Description == assignmentDescription);
+
+            if (submission != null)
+            {
+                _dataCollections.Submissions.Remove(submission);
+            }
+            else
+            {
+                Console.WriteLine($"Submission by student '{studentName}' for assignment '{assignmentDescription}' not found.");
+            }
+        }
+
     }
 }
