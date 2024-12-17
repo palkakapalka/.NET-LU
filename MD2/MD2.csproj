@@ -63,6 +63,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\MD3\MD3.csproj" />
 	  <ProjectReference Include="..\MD\MD.csproj" />
 	</ItemGroup>
 

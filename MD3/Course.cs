@@ -1,5 +1,4 @@
-﻿// File: Course.cs
-namespace MD3
+﻿namespace MD3
 {
     public class Course
     {

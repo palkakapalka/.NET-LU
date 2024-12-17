@@ -1,8 +1,9 @@
-﻿using project; 
+﻿using project;
 
 namespace MD2
 {
     public partial class MainPage : ContentPage
+
     {
         private DataManager _dataManager = new DataManager();
 
