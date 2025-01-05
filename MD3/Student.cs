@@ -7,5 +7,7 @@
         public string Surname { get; set; }
         public string Gender { get; set; }
         public string StudentIdNumber { get; set; }
+
+        public string DisplayInfo => $"{Name} {Surname}, Student Id: {StudentIdNumber}";
     }
 }

@@ -16,188 +16,370 @@
                        HorizontalOptions="Center" 
                        TextColor="#2c3e50" />
 
-                <Button Text="Apskatīt visus datus" 
-                        Clicked="OnViewDataClicked"
+                <!-- Button to show Teacher block  -->
+                <Button 
+                        Text="Teacher block" 
+                        Clicked="OnToggleTeacherClicked"
                         BackgroundColor="#3498db"
                         TextColor="White"
                         CornerRadius="8"
                         FontSize="18"
                         Padding="10,5" />
 
-                <Button Text="Radīt testa datus" 
-                        Clicked="OnGenerateDataClicked"
-                        BackgroundColor="#2ecc71"
-                        TextColor="White"
-                        CornerRadius="8"
-                        FontSize="18"
-                        Padding="10,5" />
+                <StackLayout x:Name="TeacherForm" IsVisible="False" Padding="10">
 
-                <Button Text="Ielādēt datus no faila" 
-                        Clicked="OnLoadDataClicked"
-                        BackgroundColor="#e67e22"
-                        TextColor="White"
-                        CornerRadius="8"
-                        FontSize="18"
-                        Padding="10,5" />
+                    <!-- Button to show Teacher List  -->
+                    <Button Text="Teacher List" 
+                                    Clicked="TeacherList"
+                                    BackgroundColor="#3498db"
+                                    TextColor="White"
+                                    CornerRadius="0"
+                                    FontSize="18"
+                                    Padding="10,5" />
 
-                <Button Text="Saglabar datus failā" 
-                        Clicked="SaveDataInFile"
-                        BackgroundColor="#e67e52"
-                        TextColor="White"
-                        CornerRadius="8"
-                        FontSize="18"
-                        Padding="10,5" />
+                    <!-- Button to show Teacher Creation form  -->
+                    <Button Text="Add Teacher" 
+                                    Clicked="OnToggleTeacherCreationClicked"
+                                    BackgroundColor="#3498db"
+                                    TextColor="White"
+                                    CornerRadius="0"
+                                    FontSize="18"
+                                    Padding="10,5" />
 
-                <!-- Button to toggle the Student Creation form -->
-                <Button Text="Izveidot Studentu" 
-                        Clicked="OnToggleStudentCreationClicked"
+                    <!-- Teacher Creation Form -->
+                    <StackLayout x:Name="TeacherCreationForm" IsVisible="False" Padding="10">
+                        <Entry x:Name="TeacherNameEntry" Placeholder="Teacher Name" />
+                        <Entry x:Name="TeacherSurnameEntry" Placeholder="Student Surname" />
+                        <DatePicker x:Name="ContractDatePicker" />
+                        <Picker x:Name="TeacherGenderPicker">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>M</x:String>
+                                    <x:String>F</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+
+                        <!-- Submit button -->
+                        <Button Text="Submit" 
+                                                Clicked="OnAddTeacherClicked"
+                                                BackgroundColor="#3498db"
+                                                TextColor="White"
+                                                CornerRadius="8"
+                                                FontSize="18"
+                                                Padding="10,5" />
+                    </StackLayout>
+
+                    <!-- Button to show Teacher Update form  -->
+                    <Button Text="Update Teacher information" 
+                                        Clicked="OnToggleTeacherUpdateClicked"
+                                        BackgroundColor="#3498db"
+                                        TextColor="White"
+                                        CornerRadius="0"
+                                        FontSize="18"
+                                        Padding="10,5" />
+
+                    <!-- Teacher Update Form -->
+                    <StackLayout x:Name="TeacherUpdateForm" IsVisible="False" Padding="10">
+                        <Label Text="Select Teacher:" />
+                        <Picker x:Name="TeacherPicker" Title="Choose a Teacher" 
+                                                        SelectedIndexChanged="OnTeacherSelected"
+                                                        ItemDisplayBinding="{Binding DisplayInfo}" />
+
+                        <!-- Поля для редактирования данных -->
+                        <Label Text="Edit Name (optional):" />
+                        <Entry x:Name="TeacherNewNameEntry" Placeholder="Teacher Name" />
+
+                        <Label Text="Edit Surname (optional):" />
+                        <Entry x:Name="TeacherNewSurnameEntry" Placeholder="Teacher Surname" />
+
+                        <Label Text="Edit Contract Date (optional):" />
+                        <DatePicker x:Name="NewContractDatePicker" />
+
+                        <Label Text="Edit Gender (optional):" />
+                        <Picker x:Name="TeacherNewGenderPicker" Title="Choose Gender">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>M</x:String>
+                                    <x:String>F</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+
+                        <!-- Submit button -->
+                        <Button Text="Submit" 
+                                                  Clicked="OnEditTeacherClicked"
+                                                  BackgroundColor="#3498db"
+                                                  TextColor="White"
+                                                  CornerRadius="8"
+                                                  FontSize="18"
+                                                  Padding="10,5" />
+                    </StackLayout>
+
+                    <!-- Button to show Teacher Delete form  -->
+                    <Button Text="Delete Teacher" 
+                                     Clicked="OnToggleDeleteClicked"
+                                     BackgroundColor="#3498db"
+                                     TextColor="White"
+                                     CornerRadius="0"
+                                     FontSize="18"
+                                     Padding="10,5" />
+
+                    <!-- Teacher Update Form -->
+                    <StackLayout x:Name="TeacherDeleteForm" IsVisible="False" Padding="10">
+                        <Label Text="Select Teacher:" />
+                        <Picker x:Name="TeacherPickerForDelete" Title="Choose a Teacher"  
+                                             ItemDisplayBinding="{Binding DisplayInfo}" />
+
+                        <!-- Submit button -->
+                        <Button Text="Delte" 
+                                                Clicked="OnDeleteTeacherClicked"
+                                                BackgroundColor="Red"
+                                                TextColor="White"
+                                                CornerRadius="8"
+                                                FontSize="18"
+                                                Padding="10,5" />
+                    </StackLayout>
+
+                </StackLayout>
+                <!--Student block-->
+                    <!-- Button to show Student block  -->
+                    <Button 
+                        Text="Student block" 
+                        Clicked="OnToggleStudentClicked"
                         BackgroundColor="#3498db"
                         TextColor="White"
                         CornerRadius="8"
                         FontSize="18"
                         Padding="10,5" />
 
-                <!-- Student Creation Form -->
-                <StackLayout x:Name="StudentCreationForm" IsVisible="False" Padding="10">
-                    <Entry x:Name="StudentNameEntry" Placeholder="Student Name" />
-                    <Entry x:Name="StudentSurnameEntry" Placeholder="Student Surname" />
-                    <Entry x:Name="StudentIdNumberEntry" Placeholder="Student ID" />
-                    <Picker x:Name="GenderPicker">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Man</x:String>
-                                <x:String>Woman</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                    <Button Text="Submit" 
-                            Clicked="OnAddStudentClicked"
-                            BackgroundColor="#3498db"
-                            TextColor="White"
-                            CornerRadius="8"
-                            FontSize="18"
-                            Padding="10,5" />
-                </StackLayout>
+                    <StackLayout x:Name="StudentForm" IsVisible="False" Padding="10">
 
-                <!-- Button to toggle the Assignment Creation form -->
-                <Button Text="Izveidot Uzdevumu" 
-                        Clicked="OnToggleAssignmentCreationClicked"
-                        BackgroundColor="#2ecc71"
-                        TextColor="White"
-                        CornerRadius="8"
-                        FontSize="18"
-                        Padding="10,5" />
 
-                <!-- Assignment Creation Form -->
-                <StackLayout x:Name="AssignmentCreationForm" IsVisible="False" Padding="10">
-                    <Entry x:Name="AssignmentDescriptionEntry" Placeholder="Assignment Description" />
-                    <DatePicker x:Name="AssignmentDeadlinePicker" />
-                    <Entry x:Name="CourseNameEntry" Placeholder="Course Name" />
-                    <Button Text="Submitu" 
-                            Clicked="OnAddAssignmentClicked"
-                            BackgroundColor="#2ecc71"
-                            TextColor="White"
-                            CornerRadius="8"
-                            FontSize="18"
-                            Padding="10,5" />
-                </StackLayout>
+                            <!-- Button to show Student List  -->
+                        <Button Text="Student List" 
+                                 Clicked="StudentList"
+                                 BackgroundColor="#3498db"
+                                 TextColor="White"
+                                 CornerRadius="0"
+                                 FontSize="18"
+                                 Padding="10,5" />
 
-                <!-- Button to toggle the Submission Creation form -->
-                <Button Text="Pievienot Nodevumu" 
-                        Clicked="OnToggleSubmissionCreationClicked"
-                        BackgroundColor="#e67e22"
-                        TextColor="White"
-                        CornerRadius="8"
-                        FontSize="18"
-                        Padding="10,5" />
+                        <!-- Button to show Student Creation form  -->
+                        <Button Text="Add Student" 
+                                 Clicked="OnToggleStudentCreationClicked"
+                                 BackgroundColor="#3498db"
+                                 TextColor="White"
+                                 CornerRadius="0"
+                                 FontSize="18"
+                                 Padding="10,5" />
 
-                <!-- Submission Creation Form -->
-                <StackLayout x:Name="SubmissionCreationForm" IsVisible="False" Padding="10">
-                    <Entry x:Name="SubmissionStudentNameEntry" Placeholder="Student Name for Submission" />
-                    <Entry x:Name="SubmissionAssignmentDescriptionEntry" Placeholder="Assignment Description for Submission" />
-                    <Entry x:Name="SubmissionScoreEntry" Placeholder="Score" Keyboard="Numeric" />
-                    <Button Text="Submit" 
-                            Clicked="OnAddSubmissionClicked"
-                            BackgroundColor="#e67e22"
-                            TextColor="White"
-                            CornerRadius="8"
-                            FontSize="18"
-                            Padding="10,5" />
-                </StackLayout>
-                <!-- Button to toggle visibility of Assignment form -->
-                <Button Text="Edit Assignment"
-                Clicked="OnToggleAssignmentFormClicked"
-                BackgroundColor="#3498db"
-                TextColor="White"
-                CornerRadius="8"
-                FontSize="18"
-                Padding="10,5" />
+                        <!-- Student Creation Form -->
+                        <StackLayout x:Name="StudentCreationForm" IsVisible="False" Padding="10">
+                            <Entry x:Name="StudentNameEntry" Placeholder="Student Name" />
+                            <Entry x:Name="StudentSurnameEntry" Placeholder="Student Surname" />
+                            <Entry x:Name="StudentIdNumberEntry" Placeholder="Student Id Number" />
+                            <Picker x:Name="StudentGenderPicker">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>M</x:String>
+                                        <x:String>F</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
 
-                <!-- StackLayout for editing Assignment, initially hidden -->
-                <StackLayout x:Name="AssignmentForm" IsVisible="False" Padding="10">
-                    <Entry x:Name="CurrentAssignmentDescription" Placeholder="Current Assignment Description" />
-                    <Entry x:Name="NewAssignmentDescription" Placeholder="New Assignment Description" />
-                    <Entry x:Name="NewAssignmentDeadline" Placeholder="New Deadline (dd.MM.yyyy H)" />
-                    <Entry x:Name="NewCourseName" Placeholder="New Course Name" />
-                    <Button Text="Update Assignment"
-                    Clicked="OnUpdateAssignmentClicked"
+                            <!-- Submit button -->
+                            <Button Text="Submit" 
+                                     Clicked="OnAddStudentClicked"
+                                     BackgroundColor="#3498db"
+                                     TextColor="White"
+                                     CornerRadius="8"
+                                     FontSize="18"
+                                     Padding="10,5" />
+                        </StackLayout>
+
+                        <!-- Button to show Student Update form  -->
+                        <Button Text="Update Student information" 
+                                 Clicked="OnToggleStudentUpdateClicked"
+                                 BackgroundColor="#3498db"
+                                 TextColor="White"
+                                 CornerRadius="0"
+                                 FontSize="18"
+                                 Padding="10,5" />
+
+                        <!-- Student Update Form -->
+                        <StackLayout x:Name="StudentUpdateForm" IsVisible="False" Padding="10">
+                            <Label Text="Select Student:" />
+                            <Picker x:Name="StudentPicker" Title="Choose a Student" 
+                                 SelectedIndexChanged="OnStudentSelected"
+                                 ItemDisplayBinding="{Binding DisplayInfo}" />
+
+                            <!-- Поля для редактирования данных -->
+                            <Label Text="Edit Name (optional):" />
+                            <Entry x:Name="StudentNewNameEntry" Placeholder="Student Name" />
+
+                            <Label Text="Edit Surname (optional):" />
+                            <Entry x:Name="StudentNewSurnameEntry" Placeholder="Student Surname" />
+
+                            <Label Text="Edit Student Id Number (optional):" />
+                            <Entry x:Name="NewStudentIdNumberEntry" Placeholder="Student Id" />
+
+                            <Label Text="Edit Gender (optional):" />
+                            <Picker x:Name="StudentNewGenderPicker" Title="Choose Gender">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>M</x:String>
+                                        <x:String>F</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <!-- Submit button -->
+                            <Button Text="Submit" 
+                                   Clicked="OnEditStudentClicked"
+                                   BackgroundColor="#3498db"
+                                   TextColor="White"
+                                   CornerRadius="8"
+                                   FontSize="18"
+                                   Padding="10,5" />
+                        </StackLayout>
+
+                        <!-- Button to show Student Delete form  -->
+                        <Button Text="Delete Student" 
+                                  Clicked="OnToggleStudentDeleteClicked"
+                                  BackgroundColor="#3498db"
+                                  TextColor="White"
+                                  CornerRadius="0"
+                                  FontSize="18"
+                                  Padding="10,5" />
+
+                        <!-- Student Update Form -->
+                        <StackLayout x:Name="StudentDeleteForm" IsVisible="False" Padding="10">
+                            <Label Text="Select Student:" />
+                            <Picker x:Name="StudentPickerForDelete" Title="Choose a Student"  
+                                            ItemDisplayBinding="{Binding DisplayInfo}" />
+
+                            <!-- Submit button -->
+                            <Button Text="Delte" 
+                                     Clicked="OnDeleteStudentClicked"
+                                     BackgroundColor="Red"
+                                     TextColor="White"
+                                     CornerRadius="8"
+                                     FontSize="18"
+                                     Padding="10,5" />
+                        </StackLayout>
+
+
+                    </StackLayout>
+
+                <!--Course block-->
+                <!-- Button to show Course block  -->
+                <Button 
+                    Text="Course block" 
+                    Clicked="OnToggleCourseClicked"
                     BackgroundColor="#3498db"
                     TextColor="White"
                     CornerRadius="8"
                     FontSize="18"
                     Padding="10,5" />
+
+                <StackLayout x:Name="CourseForm" IsVisible="False" Padding="10">
+
+                    <!-- Button to show Course List -->
+                    <Button Text="Course List" 
+                             Clicked="CourseList"
+                             BackgroundColor="#3498db"
+                             TextColor="White"
+                             CornerRadius="0"
+                             FontSize="18"
+                             Padding="10,5" />
+
+                    <!-- Button to show Course Creation form -->
+                    <Button Text="Add Course" 
+                             Clicked="OnToggleCourseCreationClicked"
+                             BackgroundColor="#3498db"
+                             TextColor="White"
+                             CornerRadius="0"
+                             FontSize="18"
+                             Padding="10,5" />
+
+                    <!-- Course Creation Form -->
+                    <StackLayout x:Name="CourseCreationForm" IsVisible="False" Padding="10">
+                        <Entry x:Name="CourseNameEntry" Placeholder="Course Name" />
+                        <Picker x:Name="CourseTeacherPicker" Title="Select Teacher" 
+                                ItemDisplayBinding="{Binding DisplayInfo}" />
+                        <!-- Submit button -->
+                        <Button Text="Submit" 
+                             Clicked="OnAddCourseClicked"
+                             BackgroundColor="#3498db"
+                             TextColor="White"
+                             CornerRadius="8"
+                             FontSize="18"
+                             Padding="10,5" />
+                    </StackLayout>
+
+
+                    <!-- Button to show Course Update form -->
+                    <Button Text="Update Course information" 
+                             Clicked="OnToggleCourseUpdateClicked"
+                             BackgroundColor="#3498db"
+                             TextColor="White"
+                             CornerRadius="0"
+                             FontSize="18"
+                             Padding="10,5" />
+
+                    <!-- Course Update Form -->
+                    <StackLayout x:Name="CourseUpdateForm" IsVisible="False" Padding="10">
+                        <Label Text="Select Course:" />
+                        <Picker x:Name="CoursePicker" Title="Choose a Course" 
+                                 SelectedIndexChanged="OnCourseSelected"
+                                 ItemDisplayBinding="{Binding DisplayInfo}" />
+
+                        <!-- Поля для редактирования данных -->
+                        <Label Text="Edit Name (optional):" />
+                        <Entry x:Name="CourseNewNameEntry" Placeholder="Course Name" />
+                        <Label Text="Edit Teacher (optional):" />
+                        <Picker x:Name="CourseTeacherPickerForUpdate" Title="Choose Teacher"
+                                 ItemDisplayBinding="{Binding DisplayInfo}" />
+                        <!-- Submit button -->
+                        <Button Text="Submit" 
+                               Clicked="OnEditCourseClicked"
+                               BackgroundColor="#3498db"
+                               TextColor="White"
+                               CornerRadius="8"
+                               FontSize="18"
+                               Padding="10,5" />
+                    </StackLayout>
+
+                    <!-- Button to show Course Delete form -->
+                    <Button Text="Delete Course" 
+                          Clicked="OnToggleCourseDeleteClicked"
+                          BackgroundColor="#3498db"
+                          TextColor="White"
+                          CornerRadius="0"
+                          FontSize="18"
+                          Padding="10,5" />
+
+                    <!-- Course Delete Form -->
+                    <StackLayout x:Name="CourseDeleteForm" IsVisible="False" Padding="10">
+                        <Label Text="Select Course:" />
+                        <Picker x:Name="CoursePickerForDelete" Title="Choose a Course"  
+                                 ItemDisplayBinding="{Binding DisplayInfo}" />
+                        <!-- Submit button -->
+                        <Button Text="Delete" 
+                                 Clicked="OnDeleteCourseClicked"
+                                 BackgroundColor="Red"
+                                 TextColor="White"
+                                 CornerRadius="8"
+                                 FontSize="18"
+                                 Padding="10,5" />
+                    </StackLayout>
                 </StackLayout>
 
-                <!-- Button to toggle visibility of Submission form -->
-                <Button Text="Edit Submission"
-                Clicked="OnToggleSubmissionFormClicked"
-                BackgroundColor="#3498db"
-                TextColor="White"
-                CornerRadius="8"
-                FontSize="18"
-                Padding="10,5" />
 
-                <!-- StackLayout for editing Submission, initially hidden -->
-                <StackLayout x:Name="SubmissionForm" IsVisible="False" Padding="10">
-                    <Entry x:Name="SubmissionStudentName" Placeholder="Student Name" />
-                    <Entry x:Name="SubmissionAssignmentDescription" Placeholder="Assignment Description" />
-                    <Entry x:Name="NewSubmissionScore" Placeholder="New Score" Keyboard="Numeric" />
-                    <Button Text="Update Submission"
-                    Clicked="OnUpdateSubmissionClicked"
-                    BackgroundColor="#3498db"
-                    TextColor="White"
-                    CornerRadius="8"
-                    FontSize="18"
-                    Padding="10,5" />
-                </StackLayout>
 
-                <!-- Assignment Deletion Form -->
-                <StackLayout x:Name="AssignmentDeletionForm" Padding="10">
-                    <Label Text="Delete Assignment" FontAttributes="Bold" FontSize="18" />
-                    <Entry x:Name="AssignmentDescriptionEnter" Placeholder="Assignment Description" />
-                    <Button Text="Delete Assignment"
-                    Clicked="OnDeleteAssignmentClicked"
-                    BackgroundColor="#e74c3c"
-                    TextColor="White"
-                    CornerRadius="8"
-                    FontSize="18"
-                    Padding="10,5" />
-                </StackLayout>
 
-                <!-- Submission Deletion Form -->
-                <StackLayout x:Name="SubmissionDeletionForm" Padding="10">
-                    <Label Text="Delete Submission" FontAttributes="Bold" FontSize="18" />
-                    <Entry x:Name="SubmissionStudentNameEnter" Placeholder="Student Name" />
-                    <Entry x:Name="SubmissionStudentSurnameEnter" Placeholder="Student Surname" />
-                    <Entry x:Name="SubmissionAssignmentDescriptionEnter" Placeholder="Assignment Description" />
-                    <Button Text="Delete Submission"
-                    Clicked="OnDeleteSubmissionClicked"
-                    BackgroundColor="#e74c3c"
-                    TextColor="White"
-                    CornerRadius="8"
-                    FontSize="18"
-                    Padding="10,5" />
-                </StackLayout>
+
             </StackLayout>
         </ScrollView>
 
@@ -208,7 +390,6 @@
                Padding="15"
                Grid.Column="1">
             <Label x:Name="OutputLabel" 
-                   Text="Dati tiks parādīti šeit" 
                    TextColor="#34495e" 
                    FontSize="16" />
         </Frame>

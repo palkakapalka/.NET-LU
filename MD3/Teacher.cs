@@ -7,5 +7,8 @@
         public string Surname { get; set; }
         public string Gender { get; set; }
         public DateTime ContractDate { get; set; }
+
+        public string DisplayInfo => $"{Name} {Surname}, Contract: {ContractDate.ToShortDateString()}";
     }
 }
+
