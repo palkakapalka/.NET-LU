@@ -1,4 +1,6 @@
-﻿namespace MD3
+﻿using System.Xml.Linq;
+
+namespace MD3
 {
     public class Assignment
     {
@@ -6,5 +8,7 @@
         public DateTime Deadline { get; set; }
         public int CourseId { get; set; } // Foreign key to Course
         public string Description { get; set; }
+
+        public string DisplayInfo => $"{Description}";
     }
 }
