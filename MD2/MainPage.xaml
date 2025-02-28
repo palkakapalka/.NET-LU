@@ -133,12 +133,12 @@
 
                         <!-- Submit button -->
                         <Button Text="Delte" 
-                                                Clicked="OnDeleteTeacherClicked"
-                                                BackgroundColor="Red"
-                                                TextColor="White"
-                                                CornerRadius="8"
-                                                FontSize="18"
-                                                Padding="10,5" />
+                                 Clicked="OnDeleteTeacherClicked"
+                                BackgroundColor="Red"
+                                TextColor="White"
+                                CornerRadius="8"
+                                FontSize="18"
+                                Padding="10,5" />
                     </StackLayout>
 
                 </StackLayout>
@@ -471,145 +471,145 @@
                         <Entry x:Name="AssignmentNewDescriptionEntry" Placeholder="Assignment Description" />
                         <!-- Submit button -->
                         <Button Text="Submit" 
-               Clicked="OnEditAssignmentClicked"
-               BackgroundColor="#3498db"
-               TextColor="White"
-               CornerRadius="8"
-               FontSize="18"
-               Padding="10,5" />
+                               Clicked="OnEditAssignmentClicked"
+                               BackgroundColor="#3498db"
+                               TextColor="White"
+                               CornerRadius="8"
+                               FontSize="18"
+                               Padding="10,5" />
                     </StackLayout>
 
                     <!-- Button to show Assignment Delete form -->
                     <Button Text="Delete Assignment" 
-          Clicked="OnToggleAssignmentDeleteClicked"
-          BackgroundColor="#3498db"
-          TextColor="White"
-          CornerRadius="0"
-          FontSize="18"
-          Padding="10,5" />
+                              Clicked="OnToggleAssignmentDeleteClicked"
+                              BackgroundColor="#3498db"
+                              TextColor="White"
+                              CornerRadius="0"
+                              FontSize="18"
+                              Padding="10,5" />
 
                     <!-- Assignment Delete Form -->
                     <StackLayout x:Name="AssignmentDeleteForm" IsVisible="False" Padding="10">
                         <Label Text="Select Assignment:" />
                         <Picker x:Name="AssignmentPickerForDelete" Title="Choose an Assignment"  
-                 ItemDisplayBinding="{Binding DisplayInfo}" />
+                                    ItemDisplayBinding="{Binding DisplayInfo}" />
                         <!-- Submit button -->
                         <Button Text="Delete" 
-                 Clicked="OnDeleteAssignmentClicked"
-                 BackgroundColor="Red"
-                 TextColor="White"
-                 CornerRadius="8"
-                 FontSize="18"
-                 Padding="10,5" />
+                                 Clicked="OnDeleteAssignmentClicked"
+                                 BackgroundColor="Red"
+                                 TextColor="White"
+                                 CornerRadius="8"
+                                 FontSize="18"
+                                 Padding="10,5" />
                     </StackLayout>
                 </StackLayout>
 
                 <!-- Submission block -->
                 <Button 
-    Text="Submission block" 
-    Clicked="OnToggleSubmissionClicked"
-    BackgroundColor="#3498db"
-    TextColor="White"
-    CornerRadius="8"
-    FontSize="18"
-    Padding="10,5" />
+                    Text="Submission block" 
+                    Clicked="OnToggleSubmissionClicked"
+                    BackgroundColor="#3498db"
+                    TextColor="White"
+                    CornerRadius="8"
+                    FontSize="18"
+                    Padding="10,5" />
 
                 <StackLayout x:Name="SubmissionForm" IsVisible="False" Padding="10">
 
                     <!-- Button to show Submission List -->
                     <Button Text="Submission List" 
-             Clicked="SubmissionList"
-             BackgroundColor="#3498db"
-             TextColor="White"
-             CornerRadius="0"
-             FontSize="18"
-             Padding="10,5" />
+                             Clicked="SubmissionList"
+                             BackgroundColor="#3498db"
+                             TextColor="White"
+                             CornerRadius="0"
+                             FontSize="18"
+                             Padding="10,5" />
 
                     <!-- Button to show Submission Creation form -->
                     <Button Text="Add Submission" 
-             Clicked="OnToggleSubmissionCreationClicked"
-             BackgroundColor="#3498db"
-             TextColor="White"
-             CornerRadius="0"
-             FontSize="18"
-             Padding="10,5" />
+                             Clicked="OnToggleSubmissionCreationClicked"
+                             BackgroundColor="#3498db"
+                             TextColor="White"
+                             CornerRadius="0"
+                             FontSize="18"
+                             Padding="10,5" />
 
                     <!-- Submission Creation Form -->
                     <StackLayout x:Name="SubmissionCreationForm" IsVisible="False" Padding="10">
                         <Picker x:Name="SubmissionStudentPicker" Title="Select Student" 
-                ItemDisplayBinding="{Binding DisplayInfo}" />
+                                    ItemDisplayBinding="{Binding DisplayInfo}" />
                         <Picker x:Name="SubmissionAssignmentPicker" Title="Select Assignment" 
-                ItemDisplayBinding="{Binding DisplayInfo}" />
+                                    ItemDisplayBinding="{Binding DisplayInfo}" />
                         <Entry x:Name="SubmissionScoreEntry" Placeholder="Score (0-100)" Keyboard="Numeric" />
                         <DatePicker x:Name="SubmissionTimePicker" />
                         <!-- Submit button -->
                         <Button Text="Submit" 
-                 Clicked="OnAddSubmissionClicked"
-                 BackgroundColor="#3498db"
-                 TextColor="White"
-                 CornerRadius="8"
-                 FontSize="18"
-                 Padding="10,5" />
+                                 Clicked="OnAddSubmissionClicked"
+                                 BackgroundColor="#3498db"
+                                 TextColor="White"
+                                 CornerRadius="8"
+                                 FontSize="18"
+                                 Padding="10,5" />  
                     </StackLayout>
 
                     <!-- Button to show Submission Update form -->
                     <Button Text="Update Submission information" 
-             Clicked="OnToggleSubmissionUpdateClicked"
-             BackgroundColor="#3498db"
-             TextColor="White"
-             CornerRadius="0"
-             FontSize="18"
-             Padding="10,5" />
+                             Clicked="OnToggleSubmissionUpdateClicked"
+                             BackgroundColor="#3498db"
+                             TextColor="White"
+                             CornerRadius="0"
+                             FontSize="18"
+                             Padding="10,5" />
 
                     <!-- Submission Update Form -->
                     <StackLayout x:Name="SubmissionUpdateForm" IsVisible="False" Padding="10">
                         <Label Text="Select Submission:" />
                         <Picker x:Name="SubmissionPicker" Title="Choose a Submission" 
-                 SelectedIndexChanged="OnSubmissionSelected"
-                 ItemDisplayBinding="{Binding DisplayInfo}" />
+                                     SelectedIndexChanged="OnSubmissionSelected"
+                                     ItemDisplayBinding="{Binding DisplayInfo}" />      
                         <!-- Поля для редактирования данных -->
                         <Label Text="Edit Assignment (optional):" />
                         <Picker x:Name="SubmissionNewAssignmentPicker" Title="Choose Assignment"
-                 ItemDisplayBinding="{Binding DisplayInfo}" />
+                                    ItemDisplayBinding="{Binding DisplayInfo}" />
                         <Label Text="Edit Student (optional):" />
                         <Picker x:Name="SubmissionNewStudentPicker" Title="Choose Student"
-                 ItemDisplayBinding="{Binding DisplayInfo}" />
+                                    ItemDisplayBinding="{Binding DisplayInfo}" />
                         <Label Text="Edit Submission Time (optional):" />
                         <DatePicker x:Name="SubmissionNewTimePicker" />
                         <Label Text="Edit Score (optional):" />
                         <Entry x:Name="SubmissionNewScoreEntry" Placeholder="Score (0-100)" Keyboard="Numeric" />
                         <!-- Submit button -->
                         <Button Text="Submit" 
-               Clicked="OnEditSubmissionClicked"
-               BackgroundColor="#3498db"
-               TextColor="White"
-               CornerRadius="8"
-               FontSize="18"
-               Padding="10,5" />
+                                   Clicked="OnEditSubmissionClicked"
+                                   BackgroundColor="#3498db"
+                                   TextColor="White"
+                                   CornerRadius="8"
+                                   FontSize="18"
+                                   Padding="10,5" />
                     </StackLayout>
 
                     <!-- Button to show Submission Delete form -->
                     <Button Text="Delete Submission" 
-          Clicked="OnToggleSubmissionDeleteClicked"
-          BackgroundColor="#3498db"
-          TextColor="White"
-          CornerRadius="0"
-          FontSize="18"
-          Padding="10,5" />
+                              Clicked="OnToggleSubmissionDeleteClicked"
+                              BackgroundColor="#3498db"
+                              TextColor="White"
+                              CornerRadius="0"
+                              FontSize="18"
+                              Padding="10,5" />
 
                     <!-- Submission Delete Form -->
                     <StackLayout x:Name="SubmissionDeleteForm" IsVisible="False" Padding="10">
                         <Label Text="Select Submission:" />
                         <Picker x:Name="SubmissionPickerForDelete" Title="Choose a Submission"  
-                 ItemDisplayBinding="{Binding DisplayInfo}" />
+                                ItemDisplayBinding="{Binding DisplayInfo}" />
                         <!-- Submit button -->
                         <Button Text="Delete" 
-                 Clicked="OnDeleteSubmissionClicked"
-                 BackgroundColor="Red"
-                 TextColor="White"
-                 CornerRadius="8"
-                 FontSize="18"
-                 Padding="10,5" />
+                                 Clicked="OnDeleteSubmissionClicked"
+                                 BackgroundColor="Red"
+                                 TextColor="White"
+                                 CornerRadius="8"
+                                 FontSize="18"
+                                 Padding="10,5" />
                     </StackLayout>
                 </StackLayout>
 
